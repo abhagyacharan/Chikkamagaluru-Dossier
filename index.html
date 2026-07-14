@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>The Chikmagalur Dossier - Monsoon Run, 18-21 Jul</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0F1A15;
+            --panel: #16241D;
+            --panel-2: #1C2E24;
+            --paper: #ECE3CE;
+            --brass: #C79A4B;
+            --brass-dim: #8f7137;
+            --rain: #6FA69B;
+            --clay: #B85A38;
+            --hi: #F3ECDB;
+            --mid: #B9B29C;
+            --line: rgba(236, 227, 206, 0.14);
+            --line-soft: rgba(236, 227, 206, 0.07);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--mid);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--brass);
+            color: var(--bg);
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .mono {
+            font-family: 'IBM Plex Mono', monospace;
+            letter-spacing: 0.06em;
+        }
+
+        .eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--brass);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Fraunces', serif;
+            color: var(--hi);
+            font-weight: 500;
+            line-height: 1.08;
+        }
+
+        /* NAV */
+        .tracker-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(15, 26, 21, 0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            justify-content: center;
+            gap: 1.6rem;
+            padding: 0.9rem 1rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .tracker-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tracker-nav a {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--mid);
+            text-decoration: none;
+            padding: 0.3rem 0.2rem;
+            border-bottom: 1px solid transparent;
+            white-space: nowrap;
+            transition: color .2s, border-color .2s;
+        }
+
+        .tracker-nav a:hover {
+            color: var(--brass);
+            border-color: var(--brass);
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            position: relative;
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 1.3rem 3.5rem;
+            overflow: hidden;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .contours {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.55;
+        }
+
+        .contours svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .rain {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .drop {
+            position: absolute;
+            top: -10%;
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, rgba(111, 166, 155, 0.5), transparent);
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(120vh);
+            }
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .hero .eyebrow {
+            display: block;
+            margin-bottom: 1.4rem;
+            font-size: 0.66rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 9vw, 5rem);
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--brass);
+            font-weight: 400;
+        }
+
+        .hero-sub {
+            font-size: 0.98rem;
+            color: var(--mid);
+            max-width: 540px;
+            margin: 0 auto 2.2rem;
+        }
+
+        .stat-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.55rem;
+        }
+
+        .stat-chip {
+            border: 1px solid var(--line);
+            background: rgba(236, 227, 206, 0.03);
+            padding: 0.5rem 0.85rem;
+            border-radius: 2px;
+            font-size: 0.7rem;
+            color: var(--paper);
+            letter-spacing: 0.04em;
+        }
+
+        .stat-chip b {
+            color: var(--brass);
+            font-weight: 600;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            bottom: 1.2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.2em;
+            color: var(--mid);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .scroll-cue::after {
+            content: '';
+            width: 1px;
+            height: 26px;
+            background: linear-gradient(var(--brass), transparent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        section {
+            padding: 5rem 1.3rem;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .section-head {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-head .eyebrow {
+            margin-bottom: 0.7rem;
+        }
+
+        .section-head h2 {
+            font-size: clamp(1.6rem, 5vw, 2.6rem);
+        }
+
+        .section-head p {
+            max-width: 520px;
+            margin: 0.9rem auto 0;
+            font-size: 0.92rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============ ROUTE / SPINE ============ */
+        .route-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .day-row {
+            position: relative;
+            display: grid;
+            grid-template-columns: 64px 1fr;
+            gap: 1.4rem;
+            padding-bottom: 2.8rem;
+        }
+
+        .day-row:last-child {
+            padding-bottom: 0;
+        }
+
+        .spine-track {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .spine-track::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: -2.8rem;
+            left: 50%;
+            width: 1px;
+            background: repeating-linear-gradient(to bottom, var(--line) 0, var(--line) 4px, transparent 4px, transparent 9px);
+        }
+
+        .day-row:last-child .spine-track::before {
+            display: none;
+        }
+
+        .node {
+            position: relative;
+            z-index: 2;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--brass);
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .node.peak {
+            border-color: var(--clay);
+            box-shadow: 0 0 0 4px rgba(184, 90, 56, 0.15);
+        }
+
+        .node.water {
+            border-color: var(--rain);
+        }
+
+        .elev-tag {
+            position: absolute;
+            top: -1.05rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.56rem;
+            white-space: nowrap;
+            color: var(--mid);
+            letter-spacing: 0.03em;
+        }
+
+        .node-label {
+            position: absolute;
+            top: 1.4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.52rem;
+            white-space: nowrap;
+            letter-spacing: 0.08em;
+            color: var(--brass);
+        }
+
+        .node-label.water {
+            color: var(--rain);
+        }
+
+        .day-card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            padding: 1.5rem 1.3rem 1.7rem;
+        }
+
+        .day-card-head {
+            display: flex;
+            align-items: baseline;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.4rem;
+        }
+
+        .day-num {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--brass);
+            letter-spacing: 0.12em;
+        }
+
+        .day-card h3 {
+            font-size: 1.3rem;
+        }
+
+        .day-date {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.64rem;
+            color: var(--mid);
+            margin-left: auto;
+        }
+
+        .day-blurb {
+            font-size: 0.85rem;
+            color: var(--mid);
+            margin: 0.6rem 0 1.2rem;
+            max-width: 62ch;
+        }
+
+        .stop-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .stop {
+            display: grid;
+            grid-template-columns: 60px 1fr auto;
+            gap: 0.7rem;
+            align-items: start;
+            padding-top: 0.8rem;
+            border-top: 1px solid var(--line-soft);
+        }
+
+        .stop:first-child {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .stop-time {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.64rem;
+            color: var(--brass);
+            padding-top: 0.15rem;
+        }
+
+        .stop-body strong {
+            display: block;
+            color: var(--hi);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .stop-body span {
+            font-size: 0.79rem;
+            color: var(--mid);
+        }
+
+        .stop-cost {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--rain);
+            white-space: nowrap;
+            padding-top: 0.15rem;
+        }
+
+        .stop.optional .stop-body strong::after {
+            content: 'IF TIME ALLOWS';
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.52rem;
+            color: var(--brass);
+            border: 1px solid var(--brass-dim);
+            padding: 0.1rem 0.4rem;
+            border-radius: 10px;
+            margin-left: 0.6rem;
+            margin-top: 0.2rem;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* ============ LEDGER ============ */
+        .ledger-section {
+            background: var(--panel-2);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        .cap-banner {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.3rem;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            padding: 1.4rem 1.5rem;
+            border-radius: 3px;
+            margin-bottom: 2.2rem;
+        }
+
+        .cap-banner .big-num {
+            font-family: 'Fraunces', serif;
+            font-size: 2.2rem;
+            color: var(--brass);
+            font-weight: 500;
+        }
+
+        .cap-banner .big-num sup {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--mid);
+            margin-left: 0.3rem;
+        }
+
+        .cap-label {
+            font-size: 0.76rem;
+            color: var(--mid);
+            max-width: 300px;
+        }
+
+        .bar-outer {
+            width: 100%;
+            height: 30px;
+            border-radius: 2px;
+            overflow: hidden;
+            display: flex;
+            border: 1px solid var(--line);
+            margin-bottom: 0.6rem;
+        }
+
+        .bar-seg {
+            height: 100%;
+            transition: width 1.2s cubic-bezier(.2, .8, .2, 1);
+            width: 0;
+        }
+
+        .bar-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.2rem;
+            font-size: 0.7rem;
+            margin-top: 1rem;
+        }
+
+        .bar-legend span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--mid);
+        }
+
+        .swatch {
+            width: 9px;
+            height: 9px;
+            border-radius: 1px;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .ledger-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2.2rem;
+        }
+
+        .ledger-table th {
+            text-align: left;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.64rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--brass);
+            padding: 0 0 0.8rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .ledger-table td {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--line-soft);
+            font-size: 0.85rem;
+            vertical-align: top;
+        }
+
+        .ledger-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .cat-cell {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .cat-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .item-name {
+            color: var(--hi);
+            font-weight: 600;
+        }
+
+        .item-note {
+            display: block;
+            color: var(--mid);
+            font-size: 0.76rem;
+            margin-top: 0.15rem;
+        }
+
+        .cost-cell {
+            font-family: 'IBM Plex Mono', monospace;
+            text-align: right;
+            color: var(--paper);
+            white-space: nowrap;
+        }
+
+        .ledger-table tfoot td {
+            padding-top: 1.3rem;
+            border-top: 1px solid var(--line);
+            border-bottom: none;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .foot-total .item-name {
+            color: var(--brass);
+            font-size: 0.95rem;
+        }
+
+        .foot-total .cost-cell {
+            color: var(--brass);
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .foot-buffer .cost-cell {
+            color: var(--rain);
+        }
+
+        .ledger-note {
+            margin-top: 1.5rem;
+            font-size: 0.76rem;
+            color: var(--mid);
+            border-left: 2px solid var(--brass-dim);
+            padding-left: 0.9rem;
+        }
+
+        /* ============ NOTES / SAFETY ============ */
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .note-card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            padding: 1.3rem 1.4rem;
+        }
+
+        .note-card.warn {
+            border-color: rgba(184, 90, 56, 0.4);
+        }
+
+        .note-card .eyebrow {
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .note-card.warn .eyebrow {
+            color: var(--clay);
+        }
+
+        .note-card p {
+            font-size: 0.83rem;
+            color: var(--mid);
+        }
+
+        /* ============ ESSENTIALS ============ */
+        .kit-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.4rem;
+            margin-top: 1rem;
+        }
+
+        .kit-card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            padding: 1.5rem 1.6rem 1.6rem;
+        }
+
+        .kit-card .eyebrow {
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .kit-card .kit-sub {
+            font-size: 0.78rem;
+            color: var(--mid);
+            margin-bottom: 1.1rem;
+        }
+
+        .check-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            font-size: 0.86rem;
+            color: var(--paper);
+        }
+
+        .check-list input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+            border: 1px solid var(--brass-dim);
+            border-radius: 2px;
+            background: rgba(236, 227, 206, 0.03);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .check-list input[type="checkbox"]:checked {
+            background: var(--brass);
+            border-color: var(--brass);
+        }
+
+        .check-list input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 4px;
+            height: 8px;
+            border: solid var(--bg);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .check-list label {
+            cursor: pointer;
+        }
+
+        .check-list .tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.56rem;
+            color: var(--clay);
+            border: 1px solid rgba(184, 90, 56, 0.4);
+            padding: 0.05rem 0.35rem;
+            border-radius: 8px;
+            margin-left: 0.4rem;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+
+        /* ============ FAQ ============ */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .faq-item {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            padding: 0 1.3rem;
+        }
+
+        .faq-item summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 1.1rem 0;
+            font-family: 'Fraunces', serif;
+            font-size: 1rem;
+            color: var(--hi);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-item summary::after {
+            content: '+';
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--brass);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+
+        .faq-item[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-item p {
+            font-size: 0.84rem;
+            color: var(--mid);
+            padding: 0 0 1.2rem;
+            max-width: 65ch;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            text-align: center;
+            padding: 3.5rem 1.3rem 2.5rem;
+            border-top: 1px solid var(--line);
+        }
+
+        footer .mark {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--brass);
+            margin-bottom: 0.5rem;
+        }
+
+        footer p {
+            font-size: 0.72rem;
+            color: var(--mid);
+        }
+
+        footer .gh-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            color: var(--mid);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer .gh-link svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        footer .gh-link:hover {
+            color: var(--brass);
+        }
+
+        /* ============ SCROLL PROGRESS ============ */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            width: 100%;
+            transform: scaleX(0);
+            transform-origin: 0 50%;
+            background: linear-gradient(90deg, var(--brass), var(--clay));
+            z-index: 60;
+            will-change: transform;
+        }
+
+        /* ============ GRAIN OVERLAY ============ */
+        .grain {
+            position: fixed;
+            inset: 0;
+            z-index: 55;
+            pointer-events: none;
+            opacity: 0.035;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ============ HERO AMBIENT GLOW ============ */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            width: 90vw;
+            max-width: 900px;
+            height: 60vh;
+            transform: translateX(-50%);
+            background: radial-gradient(ellipse at center, rgba(199, 154, 75, 0.14), transparent 65%);
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(20px);
+        }
+
+        /* nav active state (scroll-spy) */
+        .tracker-nav a.active {
+            color: var(--brass);
+            border-color: var(--brass);
+        }
+
+        /* hero headline word reveal */
+        .hero h1 .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(0.5em) rotate(2deg);
+            animation: wordRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes wordRise {
+            to {
+                opacity: 1;
+                transform: translateY(0) rotate(0);
+            }
+        }
+
+        .hero .eyebrow,
+        .hero-sub,
+        .stat-row {
+            opacity: 0;
+            animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero .eyebrow {
+            animation-delay: 0.05s;
+        }
+
+        .hero-sub {
+            animation-delay: 0.55s;
+        }
+
+        .stat-row {
+            animation-delay: 0.7s;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-chip {
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s, background 0.25s;
+        }
+
+        .stat-chip:hover {
+            transform: translateY(-3px);
+            border-color: var(--brass-dim);
+            background: rgba(199, 154, 75, 0.06);
+        }
+
+        /* day card hover lift */
+        .day-card {
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s, box-shadow 0.35s;
+            will-change: transform;
+        }
+
+        .day-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--brass-dim);
+            box-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.7);
+        }
+
+        /* node pulse for the peak */
+        .node.peak::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            border: 1px solid var(--clay);
+            animation: nodePulse 2.6s ease-out infinite;
+        }
+
+        @keyframes nodePulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(2.4);
+                opacity: 0;
+            }
+        }
+
+        /* stop row hover */
+        .stop {
+            transition: background 0.25s;
+            border-radius: 3px;
+        }
+
+        .stop:hover {
+            background: rgba(236, 227, 206, 0.02);
+        }
+
+        /* note + kit + faq subtle hover */
+        .note-card,
+        .kit-card {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
+        }
+
+        .note-card:hover,
+        .kit-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--brass-dim);
+        }
+
+        .faq-item {
+            transition: border-color 0.25s;
+        }
+
+        .faq-item[open] {
+            border-color: var(--brass-dim);
+        }
+
+        /* ============ REDUCED MOTION ============ */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .hero h1 .word,
+            .hero .eyebrow,
+            .hero-sub,
+            .stat-row {
+                opacity: 1;
+                transform: none;
+            }
+
+            .drop,
+            .node.peak::before {
+                display: none;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* ============ MOBILE ============ */
+        @media (max-width:640px) {
+            section {
+                padding: 3.2rem 1rem;
+            }
+
+            .ledger-section {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+
+            .tracker-nav {
+                justify-content: flex-start;
+                gap: 1.2rem;
+                padding: 0.8rem 1rem;
+            }
+
+            .day-row {
+                grid-template-columns: 28px 1fr;
+                gap: 0.8rem;
+            }
+
+            .node {
+                width: 11px;
+                height: 11px;
+            }
+
+            .elev-tag {
+                font-size: 0.5rem;
+                top: -0.95rem;
+            }
+
+            .day-card {
+                padding: 1.2rem 1rem 1.4rem;
+            }
+
+            .day-card-head {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+            }
+
+            .day-date {
+                margin-left: 0;
+            }
+
+            .stop {
+                grid-template-columns: 1fr;
+                gap: 0.15rem;
+            }
+
+            .stop-time {
+                padding-top: 0;
+            }
+
+            .stop-cost {
+                padding-top: 0.1rem;
+            }
+
+            .stop.optional .stop-body strong::after {
+                display: inline-block;
+                margin: 0.25rem 0 0;
+            }
+
+            .cap-banner {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.2rem 1.2rem;
+            }
+
+            .cap-banner .big-num {
+                font-size: 1.9rem;
+            }
+
+            /* card-ify the ledger table */
+            .ledger-table thead {
+                display: none;
+            }
+
+            .ledger-table,
+            .ledger-table tbody,
+            .ledger-table tr,
+            .ledger-table td {
+                display: block;
+                width: 100%;
+            }
+
+            .ledger-table tr {
+                border-bottom: 1px solid var(--line-soft);
+                padding: 0.9rem 0;
+            }
+
+            .ledger-table td {
+                border: none;
+                padding: 0.2rem 0;
+            }
+
+            .cat-cell {
+                margin-bottom: 0.35rem;
+            }
+
+            .cost-cell {
+                text-align: left;
+                font-size: 1rem;
+                padding-left: 1.4rem;
+            }
+
+            .ledger-table tfoot {
+                display: block;
+            }
+
+            .ledger-table tfoot tr {
+                display: block;
+                border: none;
+                padding: 0.5rem 0;
+            }
+
+            .ledger-table tfoot td {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                padding-top: 0.5rem;
+            }
+
+            .foot-total,
+            .foot-buffer {
+                display: flex !important;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .note-card {
+                padding: 1.1rem 1.2rem;
+            }
+
+            .kit-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kit-card {
+                padding: 1.2rem 1.3rem 1.3rem;
+            }
+
+            .faq-item {
+                padding: 0 1.1rem;
+            }
+
+            .faq-item summary {
+                font-size: 0.92rem;
+                padding: 0.95rem 0;
+                gap: 0.6rem;
+            }
+        }
+
+        @media (max-width:380px) {
+            .hero-sub {
+                font-size: 0.9rem;
+            }
+
+            .stat-chip {
+                font-size: 0.64rem;
+                padding: 0.45rem 0.7rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="grain"></div>
+
+    <nav class="tracker-nav">
+        <a href="#route">Route</a>
+        <a href="#budget">Budget</a>
+        <a href="#safety">Safety &amp; Tips</a>
+        <a href="#essentials">Essentials</a>
+        <a href="#faq">FAQ</a>
+    </nav>
+
+    <!-- ============ HERO ============ -->
+    <header class="hero">
+        <div class="contours">
+            <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
+                <g fill="none" stroke="#6FA69B" stroke-width="1">
+                    <path opacity="0.35" d="M-50,850 C150,800 250,900 450,830 C650,760 750,860 1050,800" />
+                    <path opacity="0.3" d="M-50,780 C180,720 260,830 470,760 C660,700 780,790 1050,730" />
+                    <path opacity="0.25" d="M-50,700 C200,640 300,760 500,690 C680,630 800,720 1050,660" />
+                </g>
+                <g fill="none" stroke="#C79A4B" stroke-width="1">
+                    <path opacity="0.3" d="M-50,300 C150,360 300,230 500,300 C680,360 820,260 1050,320" />
+                    <path opacity="0.24" d="M-50,220 C160,290 320,150 520,220 C700,290 840,180 1050,240" />
+                    <path opacity="0.18" d="M-50,140 C170,220 340,80 540,150 C710,220 850,100 1050,160" />
+                </g>
+            </svg>
+        </div>
+        <div class="rain" id="rain"></div>
+
+        <div class="hero-inner">
+            <span class="eyebrow">Hyderabad ⇄ Chikmagalur · 18-21 Jul 2026</span>
+            <h1><span class="word" style="animation-delay:.12s">The</span> <span class="word"
+                    style="animation-delay:.22s">Chikmagalur</span><br><em class="word"
+                    style="animation-delay:.36s">Dossier</em></h1>
+            <p class="hero-sub">Five men, four days of monsoon mountains, waterfalls, and bonfire nights.
+                Here's the plan.</p>
+            <!-- <div class="stat-row">
+                <div class="stat-chip"><b>1,930M</b> Summit</div>
+                <div class="stat-chip"><b>2</b> Waterfalls</div>
+                <div class="stat-chip"><b>~1,500KM</b> Drive</div>
+                <div class="stat-chip"><b>5</b> Man Squad</div>
+            </div> -->
+        </div>
+
+        <div class="scroll-cue">THE ROUTE</div>
+    </header>
+
+    <!-- ============ ROUTE ============ -->
+    <section id="route">
+        <div class="section-head reveal">
+            <span class="eyebrow">Field Route</span>
+            <h2>Drive, Climb, Chase Water, Extract</h2>
+            <p>Four checkpoints, one continuous ascent and descent - the trail line tracks real elevation from
+                Hyderabad's plains to Karnataka's highest point and back down.</p>
+        </div>
+
+        <div class="route-wrap">
+
+            <!-- DAY 1 -->
+            <div class="day-row reveal">
+                <div class="spine-track">
+                    <div class="node"></div>
+                    <span class="elev-tag mono">1,083M</span>
+                </div>
+                <div class="day-card">
+                    <div class="day-card-head">
+                        <span class="day-num">DAY 01</span>
+                        <h3>Wheels Up</h3>
+                        <span class="day-date mono">SAT 18 JUL - DRIVE + ARRIVAL</span>
+                    </div>
+                    <p class="day-blurb">3AM alarm, five guys, one XUV 3XO. Straight highway run southwest - aim to roll
+                        into Chikmagalur by afternoon, check in, and ease into the trip with a lake sunset and a fire.
+                    </p>
+                    <ul class="stop-list">
+                        <li class="stop">
+                            <span class="stop-time mono">3:00 AM</span>
+                            <div class="stop-body"><strong>Depart Hyderabad</strong><span>~9hr drive. Rotate drivers
+                                    every 2hrs, keep a running fuel/toll tally on the way.</span></div>
+                            <span class="stop-cost mono">Fuel + tolls</span>
+                        </li>
+                        <li class="stop">
+                            <span class="stop-time mono">~1:00 PM</span>
+                            <div class="stop-body"><strong>Arrive &amp; check in</strong><span>5-bed dorm, drop bags,
+                                    quick shower, reset.</span></div>
+                            <span class="stop-cost mono">-</span>
+                        </li>
+                        <li class="stop">
+                            <span class="stop-time mono">5:30 PM</span>
+                            <div class="stop-body"><strong>Hirekolale Lake sunset</strong><span>Best golden hour spot
+                                    near town, no ticket needed.</span></div>
+                            <span class="stop-cost mono">Free</span>
+                        </li>
+                        <li class="stop">
+                            <span class="stop-time mono">8:30 PM</span>
+                            <div class="stop-body"><strong>Bonfire &amp; beers</strong><span>Night one warm-up.
+                                    Whoever's driving tomorrow morning goes easy.</span></div>
+                            <span class="stop-cost mono">₹700</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- DAY 2 -->
+            <div class="day-row reveal">
+                <div class="spine-track">
+                    <div class="node peak"></div>
+                    <span class="elev-tag mono">1,930M</span>
+                    <span class="node-label">PEAK</span>
+                </div>
+                <div class="day-card">
+                    <div class="day-card-head">
+                        <span class="day-num">DAY 02</span>
+                        <h3>The Climb</h3>
+                        <span class="day-date mono">SUN 19 JUL - THE HARD DAY</span>
+                    </div>
+                    <p class="day-blurb">Karnataka's highest point at sunrise, a cloud-drenched mountain road after,
+                        then trade altitude for water at Jhari Falls.</p>
+                    <ul class="stop-list">
+                        <li class="stop">
+                            <span class="stop-time mono">6:30 AM</span>
+                            <div class="stop-body"><strong>Mullayanagiri Peak trek</strong><span>~500 steps from the
+                                    jeep point. Book the forest dept entry pass online - slots are limited on monsoon
+                                    weekends.</span></div>
+                            <span class="stop-cost mono">₹150</span>
+                        </li>
+                        <li class="stop">
+                            <span class="stop-time mono">11:00 AM</span>
+                            <div class="stop-body"><strong>Baba Budangiri mountain road</strong><span>Winding drive
+                                    through the clouds to Datta Peetha - genuinely one of the best roads in the
+                                    region.</span></div>
+                            <span class="stop-cost mono">₹100</span>
+                        </li>
+                        <li class="stop">
+                            <span class="stop-time mono">2:00 PM</span>
+                            <div class="stop-body"><strong>Jhari Falls</strong><span>Jeep transfer in through the forest
+                                    trail - sit under the falls, let the legs recover.</span></div>
+                            <span class="stop-cost mono">₹500</span>
+                        </li>
+                        <li class="stop optional">
+                            <span class="stop-time mono">5:00 PM</span>
+                            <div class="stop-body"><strong>Coffee plantation walk</strong><span>Only if there's fuel
+                                    left in the tank - an easy, unhurried estate walk and tasting.</span></div>
+                            <span class="stop-cost mono">₹350</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- DAY 3 -->
+            <div class="day-row reveal">
+                <div class="spine-track">
+                    <div class="node water"></div>
+                    <span class="elev-tag mono">1,434M</span>
+                    <span class="node-label water">Z POINT</span>
+                </div>
+                <div class="day-card">
+                    <div class="day-card-head">
+                        <span class="day-num">DAY 03</span>
+                        <h3>Falls &amp; Viewpoint</h3>
+                        <span class="day-date mono">MON 20 JUL - HEBBE + Z POINT</span>
+                    </div>
+                    <p class="day-blurb">The big waterfall of the trip, then a viewpoint trek. Pace is loose today -
+                        build in whatever's left of the day once these two are done.</p>
+                    <ul class="stop-list">
+                        <li class="stop">
+                            <span class="stop-time mono">8:30 AM</span>
+                            <div class="stop-body"><strong>Hebbe Falls</strong><span>Jeep-only access from the entry
+                                    point - own vehicles not allowed. Go early, wear proper shoes, leeches are
+                                    real.</span></div>
+                            <span class="stop-cost mono">₹708</span>
+                        </li>
+                        <li class="stop">
+                            <span class="stop-time mono">1:00 PM</span>
+                            <div class="stop-body"><strong>Z Point trek</strong><span>Kemmangundi's viewpoint trail -
+                                    misty ridge walk, one of the better payoff-to-effort hikes in the range.</span>
+                            </div>
+                            <span class="stop-cost mono">₹50</span>
+                        </li>
+                        <li class="stop optional">
+                            <span class="stop-time mono">4:00 PM</span>
+                            <div class="stop-body"><strong>Raj Bhavan &amp; Rock Garden, Kemmangundi</strong><span>Right
+                                    next to Z Point - a low-effort garden and viewpoint if there's still daylight and
+                                    legs left.</span></div>
+                            <span class="stop-cost mono">₹30</span>
+                        </li>
+                        <li class="stop optional">
+                            <span class="stop-time mono">7:00 PM</span>
+                            <div class="stop-body"><strong>Last night in town</strong><span>Wind down, pack bags, keep
+                                    it lighter than night one - early start tomorrow.</span></div>
+                            <span class="stop-cost mono">₹500</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- DAY 4 -->
+            <div class="day-row reveal">
+                <div class="spine-track">
+                    <div class="node"></div>
+                    <span class="elev-tag mono">542M</span>
+                </div>
+                <div class="day-card">
+                    <div class="day-card-head">
+                        <span class="day-num">DAY 04</span>
+                        <h3>Extract</h3>
+                        <span class="day-date mono">TUE 21 JUL - RETURN</span>
+                    </div>
+                    <p class="day-blurb">Early start, long drive, group chat goes quiet somewhere around hour six.</p>
+                    <ul class="stop-list">
+                        <li class="stop">
+                            <span class="stop-time mono">Early AM</span>
+                            <div class="stop-body"><strong>Depart Chikmagalur</strong><span>Back to Hyderabad - plan for
+                                    the same ~9hr drive, rotate drivers.</span></div>
+                            <span class="stop-cost mono">incl. Day 1</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============ LEDGER ============ -->
+    <section class="ledger-section" id="budget">
+        <div class="section-head reveal">
+            <span class="eyebrow">The Ledger</span>
+            <h2>Split The Bill</h2>
+            <p>Target cap: ₹15,000 a head. XUV 3XO diesel does the driving, and the whole 5-bed dorm is booked as one
+                block - both keep this trip cheap.</p>
+        </div>
+
+        <div class="reveal">
+            <div class="cap-banner">
+                <div>
+                    <div class="big-num" id="capNum">₹15,000<sup>/ head</sup></div>
+                    <div class="cap-label mono">BUDGET CAP - everything split 5 ways</div>
+                </div>
+                <div class="cap-label">Estimated actual spend lands around <b style="color:var(--brass)">₹7,470</b>,
+                    leaving roughly <b style="color:var(--rain)">₹7,530</b> of breathing room per person. This is a
+                    genuinely cheap trip.</div>
+            </div>
+
+            <div class="bar-outer" id="barOuter">
+                <div class="bar-seg" style="background:var(--brass);" data-w="14.9"></div>
+                <div class="bar-seg" style="background:var(--rain);" data-w="2.3"></div>
+                <div class="bar-seg" style="background:var(--clay);" data-w="12"></div>
+                <div class="bar-seg" style="background:#7a6a9c;" data-w="10.1"></div>
+                <div class="bar-seg" style="background:#5f7d8c;" data-w="8"></div>
+                <div class="bar-seg" style="background:#8f9d6a;" data-w="2.5"></div>
+                <div class="bar-seg" style="background:rgba(236,227,206,0.18);" data-w="50.2"></div>
+            </div>
+            <div class="bar-legend">
+                <span><i class="swatch" style="background:var(--brass);"></i>Fuel &amp; tolls</span>
+                <span><i class="swatch" style="background:var(--rain);"></i>Stay (3 nights)</span>
+                <span><i class="swatch" style="background:var(--clay);"></i>Food</span>
+                <span><i class="swatch" style="background:#7a6a9c;"></i>Permits &amp; jeep rides</span>
+                <span><i class="swatch" style="background:#5f7d8c;"></i>Party nights</span>
+                <span><i class="swatch" style="background:#8f9d6a;"></i>Optional extras</span>
+                <span><i class="swatch" style="background:rgba(236,227,206,0.4);"></i>Buffer / unspent</span>
+            </div>
+
+            <table class="ledger-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th style="text-align:right;">Per head</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="cat-cell"><span class="cat-dot" style="background:var(--brass);"></span>
+                            <div><span class="item-name">Fuel &amp; tolls</span><span class="item-note">XUV 3XO diesel,
+                                    ~1,500km total, 15km/l highway / 12km/l city blend, split 5 ways</span></div>
+                        </td>
+                        <td class="cost-cell">₹2,240</td>
+                    </tr>
+                    <tr>
+                        <td class="cat-cell"><span class="cat-dot" style="background:var(--rain);"></span>
+                            <div><span class="item-name">5-bed dorm stay</span><span class="item-note">₹1,700 total for
+                                    the whole dorm, 3 nights, split 5 ways</span></div>
+                        </td>
+                        <td class="cost-cell">₹340</td>
+                    </tr>
+                    <tr>
+                        <td class="cat-cell"><span class="cat-dot" style="background:var(--clay);"></span>
+                            <div><span class="item-name">Food</span><span class="item-note">All meals + chai stops, 4
+                                    days</span></div>
+                        </td>
+                        <td class="cost-cell">₹1,800</td>
+                    </tr>
+                    <tr>
+                        <td class="cat-cell"><span class="cat-dot" style="background:#7a6a9c;"></span>
+                            <div><span class="item-name">Permits &amp; jeep rides</span><span
+                                    class="item-note">Mullayanagiri pass, Baba Budangiri, Jhari Falls jeep, Hebbe Falls
+                                    jeep, Z Point entry</span></div>
+                        </td>
+                        <td class="cost-cell">₹1,508</td>
+                    </tr>
+                    <tr>
+                        <td class="cat-cell"><span class="cat-dot" style="background:#5f7d8c;"></span>
+                            <div><span class="item-name">Party nights</span><span class="item-note">Bonfire + beers,
+                                    both nights</span></div>
+                        </td>
+                        <td class="cost-cell">₹1,200</td>
+                    </tr>
+                    <tr>
+                        <td class="cat-cell"><span class="cat-dot" style="background:#8f9d6a;"></span>
+                            <div><span class="item-name">Optional extras</span><span class="item-note">Coffee plantation
+                                    walk, Kemmangundi garden - only if time allows</span></div>
+                        </td>
+                        <td class="cost-cell">₹380</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="foot-total">
+                        <td class="item-name">Estimated spend</td>
+                        <td class="cost-cell">₹7,470</td>
+                    </tr>
+                    <tr class="foot-buffer">
+                        <td class="item-name" style="color:var(--rain);">Cushion under ₹15K cap</td>
+                        <td class="cost-cell">₹7,530</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <p class="ledger-note">Fuel assumption: ~1,500km total at a blended ~13.8km/l (mostly highway, some
+                hill/city driving), diesel around ₹92/l ≈ ₹10,000, plus ~₹1,200 in tolls ≈ ₹11,200 total, split 5 ways.
+                Permits &amp; jeep breakdown: Mullayanagiri pass ₹150 · Baba Budangiri ₹100 · Jhari Falls jeep ₹500 ·
+                Hebbe Falls jeep ₹708 · Z Point entry ₹50. These are per-person estimates from current listings - treat
+                the ₹7,530 cushion as your real contingency fund, or just spend it on more coffee.</p>
+        </div>
+    </section>
+
+    <!-- ============ SAFETY & TIPS ============ -->
+    <section id="safety">
+        <div class="section-head reveal">
+            <span class="eyebrow">Safety &amp; Quick Tips</span>
+            <h2>Read This Before Day 1</h2>
+            <p>Nothing dramatic - just the stuff that actually ruins a monsoon trek if you skip it.</p>
+        </div>
+        <div class="notes-grid reveal">
+            <div class="note-card warn">
+                <span class="eyebrow">Drink &amp; Drive - No</span>
+                <p>You've got beers planned both nights and a 5-person car doing all the driving. Decide who's off-duty
+                    before the first bottle opens, not after. No exceptions.</p>
+            </div>
+            <div class="note-card warn">
+                <span class="eyebrow">Leeches</span>
+                <p>Real and common on the Hebbe, Jhari, and Baba Budangiri trails in July. Carry salt or tobacco powder,
+                    wear full-cover shoes, tuck your pants into your socks.</p>
+            </div>
+            <div class="note-card warn">
+                <span class="eyebrow">Waterfall Currents</span>
+                <p>Monsoon flow is strong and rocks are slick. Stick to marked pool areas at Hebbe and Jhari, don't
+                    chase the "better spot" past the ropes.</p>
+            </div>
+            <div class="note-card">
+                <span class="eyebrow">Book Ahead</span>
+                <p>Mullayanagiri entry passes and both jeep rides (Jhari, Hebbe) sell out on monsoon weekends. Lock all
+                    three a day or two in advance.</p>
+            </div>
+            <div class="note-card">
+                <span class="eyebrow">Mountain Roads</span>
+                <p>Baba Budangiri and Kemmangundi roads are narrow, misty, and slippery - hairpins with low visibility.
+                    Go slow, use fog lights, don't overtake blind.</p>
+            </div>
+            <div class="note-card">
+                <span class="eyebrow">Network</span>
+                <p>Patchy signal past Baba Budangiri and around Kemmangundi. Screenshot this page or save it offline
+                    before you lose signal, and share a live location before you head up.</p>
+            </div>
+            <div class="note-card">
+                <span class="eyebrow">Fuel Up Early</span>
+                <p>Petrol bunks thin out past Chikmagalur town. Top up before Day 2 and Day 3 drives, not when the
+                    tank's already low.</p>
+            </div>
+            <div class="note-card">
+                <span class="eyebrow">Pack For Wet</span>
+                <p>Quick-dry clothes, a dry bag for phones/wallets, a spare pair of socks per person. Everything gets
+                    wet at least once - plan for it.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ESSENTIALS ============ -->
+    <section id="essentials">
+        <div class="section-head reveal">
+            <span class="eyebrow">Pack List</span>
+            <h2>Must-Carry Essentials &amp; Documents</h2>
+            <p>Tick these off before 3AM Saturday - nothing on here is optional once you're on the ghat roads.</p>
+        </div>
+        <div class="kit-grid reveal">
+
+            <div class="kit-card">
+                <span class="eyebrow">Documents &amp; Car Papers</span>
+                <p class="kit-sub">One glovebox folder for all of this - don't split it across bags.</p>
+                <ul class="check-list">
+                    <li><input type="checkbox" id="d1"><label for="d1">Original Driving License <span class="tag">EVERY
+                                DRIVER</span></label></li>
+                    <li><input type="checkbox" id="d2"><label for="d2">Vehicle RC (Registration Certificate)</label>
+                    </li>
+                    <li><input type="checkbox" id="d3"><label for="d3">Valid car insurance copy</label></li>
+                    <li><input type="checkbox" id="d4"><label for="d4">PUC (Pollution Under Control) certificate</label>
+                    </li>
+                    <li><input type="checkbox" id="d5"><label for="d5">Aadhaar / govt photo ID <span class="tag">EACH
+                                PERSON</span></label></li>
+                    <li><input type="checkbox" id="d6"><label for="d6">FASTag linked &amp; sufficiently loaded</label>
+                    </li>
+                    <li><input type="checkbox" id="d7"><label for="d7">Dorm booking confirmation (screenshot +
+                            printout)</label></li>
+                    <li><input type="checkbox" id="d8"><label for="d8">Emergency contact list saved offline</label></li>
+                </ul>
+            </div>
+
+            <div class="kit-card">
+                <span class="eyebrow">Trek &amp; Outdoor Gear</span>
+                <p class="kit-sub">This is the pile that actually determines how good Day 2 and Day 3 feel.</p>
+                <ul class="check-list">
+                    <li><input type="checkbox" id="g1"><label for="g1">Proper grip shoes <span class="tag">NOT
+                                SANDALS</span></label></li>
+                    <li><input type="checkbox" id="g2"><label for="g2">Quick-dry clothes, 2-3 sets</label></li>
+                    <li><input type="checkbox" id="g3"><label for="g3">Rain jacket or poncho</label></li>
+                    <li><input type="checkbox" id="g4"><label for="g4">Dry bag / ziplocks for phones &amp;
+                            wallets</label></li>
+                    <li><input type="checkbox" id="g5"><label for="g5">Headlamp or torch + spare batteries</label></li>
+                    <li><input type="checkbox" id="g6"><label for="g6">Power bank <span class="tag">SIGNAL IS
+                                PATCHY</span></label></li>
+                    <li><input type="checkbox" id="g7"><label for="g7">Leech socks or salt/tobacco powder</label></li>
+                    <li><input type="checkbox" id="g8"><label for="g8">Reusable water bottle</label></li>
+                </ul>
+            </div>
+
+            <div class="kit-card">
+                <span class="eyebrow">Health &amp; Money</span>
+                <p class="kit-sub">Small stuff that's a nightmare to find once you're past Baba Budangiri.</p>
+                <ul class="check-list">
+                    <li><input type="checkbox" id="h1"><label for="h1">Basic first-aid kit (antiseptic, band-aids,
+                            ORS)</label></li>
+                    <li><input type="checkbox" id="h2"><label for="h2">Personal medication, if any</label></li>
+                    <li><input type="checkbox" id="h3"><label for="h3">Mosquito / insect repellent</label></li>
+                    <li><input type="checkbox" id="h4"><label for="h4">Cash <span class="tag">JEEPS ARE
+                                CASH-ONLY</span></label></li>
+                    <li><input type="checkbox" id="h5"><label for="h5">Debit/credit card as backup</label></li>
+                </ul>
+            </div>
+
+            <div class="kit-card">
+                <span class="eyebrow">Vehicle &amp; Misc</span>
+                <p class="kit-sub">Five-minute checks before wheels-up that save a bad afternoon later.</p>
+                <ul class="check-list">
+                    <li><input type="checkbox" id="m1"><label for="m1">Spare tyre + jack checked</label></li>
+                    <li><input type="checkbox" id="m2"><label for="m2">Spare vehicle key</label></li>
+                    <li><input type="checkbox" id="m3"><label for="m3">Offline Google Maps area downloaded for
+                            Chikmagalur</label></li>
+                    <li><input type="checkbox" id="m4"><label for="m4">This page saved/screenshotted offline</label>
+                    </li>
+                    <li><input type="checkbox" id="m5"><label for="m5">Portable speaker for bonfire nights</label></li>
+                    <li><input type="checkbox" id="m6"><label for="m6">Trash bags - carry your own waste back
+                            out</label></li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq">
+        <div class="section-head reveal">
+            <span class="eyebrow">FAQ</span>
+            <h2>Questions That'll Come Up</h2>
+        </div>
+        <div class="faq-list reveal">
+            <details class="faq-item">
+                <summary>Is Hebbe Falls jeep booking mandatory, or can we just drive up?</summary>
+                <p>Private vehicles aren't allowed on the Hebbe Falls track - it's jeep-only from the designated entry
+                    point. Budget the ₹708/head and go early to avoid a long queue for jeeps.</p>
+            </details>
+            <details class="faq-item">
+                <summary>What if it's raining too hard to trek Mullayanagiri or Z Point?</summary>
+                <p>Both spots can close or get genuinely unsafe in heavy downpour - visibility drops and the
+                    steps/trails get slick. Check conditions with the dorm the morning of, and have Baba Budangiri's
+                    scenic drive or the coffee estate walk as a fallback since those need less trail exposure.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Do we need cash, or is UPI fine everywhere?</summary>
+                <p>UPI works in Chikmagalur town, but jeep counters and small entry points at Jhari, Hebbe, and Z Point
+                    are often cash-only, especially in monsoon when card machines act up. Carry enough cash for permits
+                    and jeep rides.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Is the water at Jhari and Hebbe safe to get into?</summary>
+                <p>Shallow marked pool areas are generally fine, but monsoon current is strong. Don't swim past the
+                    marked zones, and skip it entirely if the falls look unusually swollen that day - locals/jeep
+                    drivers will usually tell you if it's a bad day.</p>
+            </details>
+            <details class="faq-item">
+                <summary>How much fuel should we actually budget for the drive?</summary>
+                <p>~1,500km total across the trip. At a blended ~13.8km/l for the XUV 3XO (15 highway / 12 city) and
+                    diesel around ₹92/l, that's roughly ₹10,000 in fuel plus ~₹1,200 in tolls - split five ways, that's
+                    the ₹2,240/head in the ledger above.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Do we need any special permit to drive a Telangana-registered car into Karnataka?</summary>
+                <p>No extra permit is needed for a private, non-commercial vehicle crossing state lines - this only
+                    applies to commercial vehicles. Just make sure FASTag is loaded, since Karnataka's highway tolls run
+                    on the same national system.</p>
+            </details>
+            <details class="faq-item">
+                <summary>What's the nearest hospital if something goes wrong on a trek?</summary>
+                <p>Chikmagalur town has a district hospital and a few private clinics, roughly 20-40 minutes from most
+                    of these trek points depending on traffic and road conditions. Save the district hospital's location
+                    offline before you lose signal near Baba Budangiri or Kemmangundi.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Any wildlife we should be careful of on these trails?</summary>
+                <p>The Baba Budangiri and Mullayanagiri range borders reserve forest, so keep an eye out for the
+                    occasional wild boar or snake on misty trails, especially early morning. Stick to marked paths,
+                    don't wander off after dark, and keep food packed away at the dorm.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Are there ATMs in Chikmagalur town?</summary>
+                <p>Yes, a handful in the main town area, but none near Baba Budangiri, Kemmangundi, or the falls.
+                    Withdraw what you need before Day 2 - don't count on finding one mid-trek.</p>
+            </details>
+        </div>
+    </section>
+
+    <footer>
+        <div class="mark">Live it. Now.</div>
+        <p class="mono">CHIKMAGALUR DOSSIER · 18-21 JUL 2026</p>
+        <a class="gh-link" href="https://github.com/abhagyacharan" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z" />
+            </svg>
+            <span>abhagyacharan</span>
+        </a>
+    </footer>
+
+    <script>
+        const rain = document.getElementById('rain');
+        const dropCount = window.innerWidth < 640 ? 12 : 22;
+        for (let i = 0; i < dropCount; i++) {
+            const d = document.createElement('div');
+            d.className = 'drop';
+            d.style.left = Math.random() * 100 + '%';
+            d.style.animationDuration = (2.5 + Math.random() * 2.5) + 's';
+            d.style.animationDelay = (Math.random() * 4) + 's';
+            d.style.opacity = 0.3 + Math.random() * 0.4;
+            rain.appendChild(d);
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('in-view');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // scroll progress bar (rAF-throttled, transform-only)
+        const progress = document.getElementById('scrollProgress');
+        let ticking = false;
+        function updateProgress() {
+            const h = document.documentElement;
+            const max = h.scrollHeight - h.clientHeight;
+            const pct = max > 0 ? h.scrollTop / max : 0;
+            progress.style.transform = 'scaleX(' + pct + ')';
+            ticking = false;
+        }
+        document.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateProgress);
+                ticking = true;
+            }
+        }, { passive: true });
+        updateProgress();
+
+        // nav scroll-spy
+        const navLinks = document.querySelectorAll('.tracker-nav a');
+        const spyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    navLinks.forEach(l => l.classList.toggle('active',
+                        l.getAttribute('href') === '#' + e.target.id));
+                }
+            });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        document.querySelectorAll('section[id]').forEach(s => spyObserver.observe(s));
+
+        const bar = document.getElementById('barOuter');
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    document.querySelectorAll('.bar-seg').forEach(seg => {
+                        seg.style.width = seg.dataset.w + '%';
+                    });
+                    barObserver.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        barObserver.observe(bar);
+    </script>
+
+</body>
+
+</html>
