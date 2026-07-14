@@ -30,20 +30,35 @@ python3 -m http.server 8087
 
 ## Deploy behind a Cloudflare tunnel
 
-These steps serve the page at a subdomain (e.g. `chikkamagaluru.abhagyacharan.xyz`) from a home Ubuntu server, using Python's built-in static server as a systemd service behind an existing `cloudflared` tunnel. Adjust the port (`8087`), tunnel name (`websites`), and hostname to your own.
+These steps serve the page at a subdomain (e.g. `chikkamagaluru.abhagyacharan.xyz`) from a home Ubuntu server behind an existing `cloudflared` tunnel. Pick one of the two serving methods below (Docker or Python/systemd), then follow the shared tunnel steps. Both bind to `127.0.0.1:8087` so only the tunnel reaches them. Adjust the port (`8087`), tunnel name (`websites`), and hostname to your own.
 
-### 1. Place the file
+Start by pulling the repo onto the server:
+
+```bash
+git clone https://github.com/abhagyacharan/YOUR_REPO_NAME.git chikkamagaluru-src
+cd chikkamagaluru-src
+```
+
+### Serve the file - Option A: Docker (recommended)
+
+Uses the included `Dockerfile` and `docker-compose.yml` (nginx:alpine, `restart: unless-stopped`).
+
+```bash
+docker compose up -d --build
+docker compose ps                 # expect "running"
+curl -I http://127.0.0.1:8087     # expect HTTP/1.1 200 OK
+```
+
+Manage with `docker compose logs -f`, `docker compose restart`, `docker compose down`.
+
+### Serve the file - Option B: Python + systemd (no Docker)
+
+Zero extra installs; Python ships with Ubuntu.
 
 ```bash
 sudo mkdir -p /var/www/chikkamagaluru
 sudo cp itinerary.html /var/www/chikkamagaluru/index.html
-```
 
-Naming it `index.html` makes the root URL serve it directly.
-
-### 2. Run it as a systemd service
-
-```bash
 sudo tee /etc/systemd/system/chikkamagaluru.service > /dev/null <<'EOF'
 [Unit]
 Description=Chikkamagaluru itinerary static site
@@ -62,11 +77,10 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now chikkamagaluru.service
+curl -I http://127.0.0.1:8087     # expect HTTP/1.0 200 OK
 ```
 
-`--bind 127.0.0.1` keeps the server local-only; only the tunnel reaches it.
-
-### 3. Add the ingress rule
+### Shared tunnel step 1: add the ingress rule
 
 Edit your tunnel config (usually `/etc/cloudflared/config.yml`) and add the hostname **above** the `http_status:404` catch-all:
 
@@ -78,7 +92,7 @@ ingress:
   - service: http_status:404
 ```
 
-### 4. Route DNS and restart
+### Shared tunnel step 2: route DNS and restart
 
 ```bash
 cloudflared tunnel route dns websites chikkamagaluru.abhagyacharan.xyz
@@ -89,7 +103,32 @@ Cloudflare terminates TLS at its edge, so the public URL is HTTPS automatically.
 
 ### Updating the page
 
-Copy a new `index.html` into `/var/www/chikkamagaluru/`. No restart needed - `http.server` reads the file fresh per request. Hard-refresh (Ctrl+Shift+R) to bypass browser cache.
+**Docker (Option A):** rebuild after pulling, since the HTML is baked into the image.
+
+```bash
+cd chikkamagaluru-src && git pull
+docker compose up -d --build
+```
+
+To skip rebuilds, mount the file live instead by using this service in `docker-compose.yml`:
+
+```yaml
+services:
+  chikkamagaluru:
+    image: nginx:alpine
+    container_name: chikkamagaluru
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8087:80"
+    volumes:
+      - ./itinerary.html:/usr/share/nginx/html/index.html:ro
+```
+
+With the mount, updating is just `git pull` (no rebuild).
+
+**Python/systemd (Option B):** copy a new `index.html` into `/var/www/chikkamagaluru/`. No restart needed - `http.server` reads the file fresh per request.
+
+Either way, hard-refresh (Ctrl+Shift+R) to bypass browser cache.
 
 ## License
 
