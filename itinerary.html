@@ -98,6 +98,9 @@
         }
 
         .tracker-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
             font-family: 'IBM Plex Mono', monospace;
             font-size: 0.68rem;
             letter-spacing: 0.1em;
@@ -108,6 +111,17 @@
             border-bottom: 1px solid transparent;
             white-space: nowrap;
             transition: color .2s, border-color .2s;
+        }
+
+        .tracker-nav a svg {
+            width: 17px;
+            height: 17px;
+            flex-shrink: 0;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .tracker-nav a:hover {
@@ -473,7 +487,7 @@
             padding: 0.1rem 0.4rem;
             border-radius: 10px;
             margin-left: 0.6rem;
-            margin-top: 0.2rem;
+            /* margin-top: 0.2rem; */
             letter-spacing: 0.05em;
             display: inline-block;
             vertical-align: middle;
@@ -1066,6 +1080,11 @@
 
         /* ============ MOBILE ============ */
         @media (max-width:640px) {
+            .hero {
+                min-height: 80vh;
+                padding: 2.2rem 1.3rem 2rem;
+            }
+
             section {
                 padding: 3.2rem 1rem;
             }
@@ -1076,9 +1095,18 @@
             }
 
             .tracker-nav {
-                justify-content: flex-start;
-                gap: 1.2rem;
-                padding: 0.8rem 1rem;
+                justify-content: space-around;
+                gap: 0.5rem;
+                padding: 0.8rem 0.6rem;
+            }
+
+            .tracker-nav a span {
+                display: none;
+            }
+
+            .tracker-nav a svg {
+                width: 20px;
+                height: 20px;
             }
 
             .day-row {
@@ -1123,10 +1151,10 @@
                 padding-top: 0.1rem;
             }
 
-            .stop.optional .stop-body strong::after {
+            /* .stop.optional .stop-body strong::after {
                 display: inline-block;
                 margin: 0.25rem 0 0;
-            }
+            } */
 
             .cap-banner {
                 flex-direction: column;
@@ -1237,27 +1265,140 @@
     <div class="grain"></div>
 
     <nav class="tracker-nav">
-        <a href="#route">Route</a>
-        <a href="#budget">Budget</a>
-        <a href="#safety">Safety &amp; Tips</a>
-        <a href="#essentials">Essentials</a>
-        <a href="#faq">FAQ</a>
+        <a href="#route" aria-label="Route" title="Route">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="6" cy="19" r="2.2" />
+                <circle cx="18" cy="5" r="2.2" />
+                <path d="M8 19h6a4 4 0 0 0 4-4V8" />
+            </svg>
+            <span>Route</span>
+        </a>
+        <a href="#budget" aria-label="Budget" title="Budget">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="6" width="18" height="13" rx="2" />
+                <path d="M3 10h18M16 14h2" />
+            </svg>
+            <span>Budget</span>
+        </a>
+        <a href="#safety" aria-label="Safety &amp; Tips" title="Safety &amp; Tips">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3l7 3v5c0 4.2-2.9 7.6-7 8.8C7.9 18.6 5 15.2 5 11V6l7-3z" />
+            </svg>
+            <span>Safety</span>
+        </a>
+        <a href="#essentials" aria-label="Essentials" title="Essentials">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6h4l1.5 12h9L20 9H6" />
+                <path d="M9 6a3 3 0 0 1 6 0" />
+            </svg>
+            <span>Essentials</span>
+        </a>
+        <a href="#faq" aria-label="FAQ" title="FAQ">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M9.2 9.3a2.8 2.8 0 0 1 5.4 1c0 1.9-2.6 2.3-2.6 4" />
+                <circle cx="12" cy="17.3" r="0.4" fill="currentColor" />
+            </svg>
+            <span>FAQ</span>
+        </a>
     </nav>
 
     <!-- ============ HERO ============ -->
     <header class="hero">
         <div class="contours">
-            <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
-                <g fill="none" stroke="#6FA69B" stroke-width="1">
-                    <path opacity="0.35" d="M-50,850 C150,800 250,900 450,830 C650,760 750,860 1050,800" />
-                    <path opacity="0.3" d="M-50,780 C180,720 260,830 470,760 C660,700 780,790 1050,730" />
-                    <path opacity="0.25" d="M-50,700 C200,640 300,760 500,690 C680,630 800,720 1050,660" />
+            <svg viewBox="0 0 1000 820" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <radialGradient id="cg" cx="42%" cy="48%" r="58%">
+                        <stop offset="0%" stop-color="#0F1A15" stop-opacity="0"/>
+                        <stop offset="100%" stop-color="#0F1A15" stop-opacity="0.72"/>
+                    </radialGradient>
+                </defs>
+
+                <!-- Primary massif — Mullayanagiri-style ridge, centred left -->
+                <g fill="none" stroke="#6FA69B" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- summit ring -->
+                    <path opacity="0.55" stroke-width="0.7"
+                        d="M 318,338 C 330,328 348,322 364,325 C 378,328 388,340 382,354 C 376,368 358,374 342,370 C 326,366 312,352 318,338 Z"/>
+                    <!-- 2nd ring -->
+                    <path opacity="0.44" stroke-width="0.8"
+                        d="M 298,330 C 316,308 348,296 378,302 C 406,308 424,332 416,358 C 408,382 380,394 352,388 C 322,382 296,366 294,344 C 293,339 295,334 298,330 Z"/>
+                    <!-- 3rd ring -->
+                    <path opacity="0.34" stroke-width="0.85"
+                        d="M 272,322 C 296,292 342,274 384,280 C 424,286 452,314 448,350 C 444,386 414,408 376,412 C 338,416 298,402 278,374 C 260,350 260,336 272,322 Z"/>
+                    <!-- 4th ring -->
+                    <path opacity="0.25" stroke-width="0.9"
+                        d="M 244,316 C 274,276 336,254 392,260 C 446,266 484,302 480,350 C 476,396 438,428 390,434 C 342,440 292,422 262,392 C 236,366 228,344 244,316 Z"/>
+                    <!-- 5th ring -->
+                    <path opacity="0.18" stroke-width="0.95"
+                        d="M 212,312 C 250,260 330,234 400,242 C 466,250 510,294 506,352 C 502,408 460,448 400,456 C 340,464 276,442 240,406 C 208,374 192,350 212,312 Z"/>
+                    <!-- 6th ring -->
+                    <path opacity="0.13" stroke-width="1.0"
+                        d="M 178,308 C 224,246 322,214 406,222 C 488,230 540,282 536,354 C 532,424 484,470 410,480 C 336,490 258,464 218,422 C 180,384 162,356 178,308 Z"/>
+                    <!-- 7th ring — broad base -->
+                    <path opacity="0.09" stroke-width="1.05"
+                        d="M 138,306 C 194,230 312,194 412,202 C 510,210 572,270 568,356 C 564,440 508,494 422,506 C 334,518 238,488 196,440 C 156,396 140,360 138,306 Z"/>
+                    <!-- 8th ring — widest base, bleeds off canvas -->
+                    <path opacity="0.06" stroke-width="1.1"
+                        d="M 96,308 C 162,214 300,172 418,182 C 532,192 606,260 602,358 C 598,456 534,520 436,534 C 338,548 218,514 168,460 C 122,410 100,368 96,308 Z"/>
                 </g>
-                <g fill="none" stroke="#C79A4B" stroke-width="1">
-                    <path opacity="0.3" d="M-50,300 C150,360 300,230 500,300 C680,360 820,260 1050,320" />
-                    <path opacity="0.24" d="M-50,220 C160,290 320,150 520,220 C700,290 840,180 1050,240" />
-                    <path opacity="0.18" d="M-50,140 C170,220 340,80 540,150 C710,220 850,100 1050,160" />
+
+                <!-- Secondary ridge — Baba Budangiri spur, upper-right -->
+                <g fill="none" stroke="#6FA69B" stroke-linecap="round" stroke-linejoin="round">
+                    <path opacity="0.38" stroke-width="0.65"
+                        d="M 700,198 C 714,188 732,184 746,190 C 758,196 764,210 756,222 C 748,234 730,238 716,232 C 702,226 694,212 700,198 Z"/>
+                    <path opacity="0.28" stroke-width="0.75"
+                        d="M 678,190 C 698,170 732,162 760,170 C 786,178 800,200 792,222 C 784,244 758,256 730,250 C 702,244 678,226 676,206 C 675,200 676,194 678,190 Z"/>
+                    <path opacity="0.20" stroke-width="0.85"
+                        d="M 650,186 C 676,158 722,146 758,154 C 792,162 814,188 808,218 C 802,248 772,266 740,262 C 708,258 676,240 662,216 C 650,196 648,190 650,186 Z"/>
+                    <path opacity="0.13" stroke-width="0.9"
+                        d="M 620,184 C 652,148 712,132 756,140 C 798,148 826,180 820,216 C 814,252 778,276 740,274 C 702,272 658,252 638,224 C 620,200 616,190 620,184 Z"/>
+                    <path opacity="0.08" stroke-width="0.95"
+                        d="M 586,182 C 626,138 700,118 752,128 C 804,138 840,174 834,216 C 828,258 786,286 742,286 C 698,286 642,264 614,232 C 590,204 582,190 586,182 Z"/>
                 </g>
+
+                <!-- Tertiary foothill — lower-left valley terrain -->
+                <g fill="none" stroke="#C79A4B" stroke-linecap="round" stroke-linejoin="round">
+                    <path opacity="0.28" stroke-width="0.65"
+                        d="M 82,598 C 102,580 132,572 158,578 C 182,584 196,602 190,622 C 184,640 160,650 136,644 C 112,638 88,622 82,598 Z"/>
+                    <path opacity="0.20" stroke-width="0.75"
+                        d="M 52,590 C 80,560 128,548 164,556 C 198,564 218,590 212,618 C 206,646 176,662 144,658 C 112,654 72,638 56,614 C 44,596 44,592 52,590 Z"/>
+                    <path opacity="0.14" stroke-width="0.85"
+                        d="M 16,584 C 52,544 116,528 164,536 C 210,544 238,576 232,612 C 226,648 192,670 152,668 C 112,666 58,646 30,618 C 8,596 2,590 16,584 Z"/>
+                    <path opacity="0.09" stroke-width="0.90"
+                        d="M -18,580 C 24,530 104,510 162,518 C 220,526 254,564 248,606 C 242,648 204,676 158,676 C 112,676 44,652 6,622 C -26,596 -30,588 -18,580 Z"/>
+                </g>
+
+                <!-- Right-side foothill cluster -->
+                <g fill="none" stroke="#C79A4B" stroke-linecap="round" stroke-linejoin="round">
+                    <path opacity="0.22" stroke-width="0.65"
+                        d="M 848,560 C 862,544 886,538 906,546 C 924,554 932,574 924,592 C 916,610 890,618 866,610 C 842,602 832,582 848,560 Z"/>
+                    <path opacity="0.15" stroke-width="0.75"
+                        d="M 822,552 C 844,524 888,514 918,524 C 946,534 960,560 952,586 C 944,612 914,626 882,620 C 850,614 820,596 818,572 C 817,564 818,556 822,552 Z"/>
+                    <path opacity="0.10" stroke-width="0.85"
+                        d="M 792,546 C 822,510 876,498 916,510 C 954,522 972,554 964,584 C 956,614 920,634 882,630 C 844,626 800,606 786,578 C 775,558 780,550 792,546 Z"/>
+                </g>
+
+                <!-- Full-width gentle terrain ridgelines across the canvas -->
+                <g fill="none" stroke="#ECE3CE" stroke-linecap="round">
+                    <path opacity="0.18" stroke-width="0.8"
+                        d="M -20,680 C 60,662 160,670 250,658 C 340,646 420,620 510,618 C 600,616 680,638 780,650 C 860,660 940,654 1020,646"/>
+                    <path opacity="0.13" stroke-width="0.75"
+                        d="M -20,724 C 80,706 180,716 280,704 C 380,692 460,668 560,666 C 650,664 740,688 830,702 C 900,714 960,708 1020,700"/>
+                    <path opacity="0.09" stroke-width="0.7"
+                        d="M -20,764 C 100,748 200,758 310,746 C 410,734 500,714 610,712 C 710,710 800,736 890,750 C 950,760 990,756 1020,750"/>
+                    <path opacity="0.15" stroke-width="0.8"
+                        d="M -20,628 C 70,612 170,622 260,608 C 360,594 450,570 550,572 C 640,574 730,598 820,614 C 890,626 960,622 1020,614"/>
+                    <path opacity="0.10" stroke-width="0.7"
+                        d="M -20,576 C 80,558 180,572 280,556 C 380,540 470,520 570,522 C 660,524 750,550 840,568 C 910,582 968,578 1020,572"/>
+                    <!-- upper band -->
+                    <path opacity="0.10" stroke-width="0.65"
+                        d="M -20,468 C 90,450 200,460 310,444 C 420,428 510,408 620,412 C 710,416 800,440 890,460 C 950,474 990,472 1020,466"/>
+                    <path opacity="0.07" stroke-width="0.60"
+                        d="M -20,418 C 100,400 210,412 320,396 C 430,380 520,360 630,364 C 720,368 810,394 900,414 C 960,428 996,426 1020,420"/>
+                </g>
+
+                <!-- Vignette overlay to fade edges into background -->
+                <rect width="1000" height="820" fill="url(#cg)"/>
             </svg>
         </div>
         <div class="rain" id="rain"></div>
@@ -1303,7 +1444,7 @@
                         <h3>Wheels Up</h3>
                         <span class="day-date mono">SAT 18 JUL - DRIVE + ARRIVAL</span>
                     </div>
-                    <p class="day-blurb">3AM alarm, five guys, one XUV 3XO. Straight highway run southwest - aim to roll
+                    <p class="day-blurb">3 AM sharp. Straight highway run southwest - aim to roll
                         into Chikmagalur by afternoon, check in, and ease into the trip with a lake sunset and a fire.
                     </p>
                     <ul class="stop-list">
@@ -1413,7 +1554,7 @@
                         </li>
                         <li class="stop optional">
                             <span class="stop-time mono">4:00 PM</span>
-                            <div class="stop-body"><strong>Raj Bhavan &amp; Rock Garden, Kemmangundi</strong><span>Right
+                            <div class="stop-body"><strong>Rock Garden, Kemmangundi</strong><span>Right
                                     next to Z Point - a low-effort garden and viewpoint if there's still daylight and
                                     legs left.</span></div>
                             <span class="stop-cost mono">₹30</span>
@@ -1460,8 +1601,8 @@
         <div class="section-head reveal">
             <span class="eyebrow">The Ledger</span>
             <h2>Split The Bill</h2>
-            <p>Target cap: ₹15,000 a head. XUV 3XO diesel does the driving, and the whole 5-bed dorm is booked as one
-                block - both keep this trip cheap.</p>
+            <p>Target cap: ₹15,000 a head. The XUV 3XO does the driving, and it's a modest 5-bed dorm - both keep this
+                trip cheap.</p>
         </div>
 
         <div class="reveal">
@@ -1470,19 +1611,19 @@
                     <div class="big-num" id="capNum">₹15,000<sup>/ head</sup></div>
                     <div class="cap-label mono">BUDGET CAP - everything split 5 ways</div>
                 </div>
-                <div class="cap-label">Estimated actual spend lands around <b style="color:var(--brass)">₹7,470</b>,
-                    leaving roughly <b style="color:var(--rain)">₹7,530</b> of breathing room per person. This is a
+                <div class="cap-label">Estimated actual spend lands around <b style="color:var(--brass)">₹9,328</b>,
+                    leaving roughly <b style="color:var(--rain)">₹5,672</b> of breathing room per person. This is a
                     genuinely cheap trip.</div>
             </div>
 
             <div class="bar-outer" id="barOuter">
-                <div class="bar-seg" style="background:var(--brass);" data-w="14.9"></div>
-                <div class="bar-seg" style="background:var(--rain);" data-w="2.3"></div>
+                <div class="bar-seg" style="background:var(--brass);" data-w="18.3"></div>
+                <div class="bar-seg" style="background:var(--rain);" data-w="11.3"></div>
                 <div class="bar-seg" style="background:var(--clay);" data-w="12"></div>
                 <div class="bar-seg" style="background:#7a6a9c;" data-w="10.1"></div>
                 <div class="bar-seg" style="background:#5f7d8c;" data-w="8"></div>
                 <div class="bar-seg" style="background:#8f9d6a;" data-w="2.5"></div>
-                <div class="bar-seg" style="background:rgba(236,227,206,0.18);" data-w="50.2"></div>
+                <div class="bar-seg" style="background:rgba(236,227,206,0.18);" data-w="37.8"></div>
             </div>
             <div class="bar-legend">
                 <span><i class="swatch" style="background:var(--brass);"></i>Fuel &amp; tolls</span>
@@ -1504,17 +1645,17 @@
                 <tbody>
                     <tr>
                         <td class="cat-cell"><span class="cat-dot" style="background:var(--brass);"></span>
-                            <div><span class="item-name">Fuel &amp; tolls</span><span class="item-note">XUV 3XO diesel,
-                                    ~1,500km total, 15km/l highway / 12km/l city blend, split 5 ways</span></div>
+                            <div><span class="item-name">Fuel &amp; tolls</span><span class="item-note">XUV 3XO,
+                                    ~1,500km total at ~12km/l, split 5 ways</span></div>
                         </td>
-                        <td class="cost-cell">₹2,240</td>
+                        <td class="cost-cell">₹2,740</td>
                     </tr>
                     <tr>
                         <td class="cat-cell"><span class="cat-dot" style="background:var(--rain);"></span>
-                            <div><span class="item-name">5-bed dorm stay</span><span class="item-note">₹1,700 total for
-                                    the whole dorm, 3 nights, split 5 ways</span></div>
+                            <div><span class="item-name">5-bed dorm stay</span><span class="item-note">₹1,700 per
+                                    person for 3 nights</span></div>
                         </td>
-                        <td class="cost-cell">₹340</td>
+                        <td class="cost-cell">₹1,700</td>
                     </tr>
                     <tr>
                         <td class="cat-cell"><span class="cat-dot" style="background:var(--clay);"></span>
@@ -1549,20 +1690,20 @@
                 <tfoot>
                     <tr class="foot-total">
                         <td class="item-name">Estimated spend</td>
-                        <td class="cost-cell">₹7,470</td>
+                        <td class="cost-cell">₹9,328</td>
                     </tr>
                     <tr class="foot-buffer">
                         <td class="item-name" style="color:var(--rain);">Cushion under ₹15K cap</td>
-                        <td class="cost-cell">₹7,530</td>
+                        <td class="cost-cell">₹5,672</td>
                     </tr>
                 </tfoot>
             </table>
 
-            <p class="ledger-note">Fuel assumption: ~1,500km total at a blended ~13.8km/l (mostly highway, some
-                hill/city driving), diesel around ₹92/l ≈ ₹10,000, plus ~₹1,200 in tolls ≈ ₹11,200 total, split 5 ways.
+            <p class="ledger-note">Fuel assumption: ~1,500km total at ~12km/l ≈ 125 litres, petrol around ₹100/l ≈
+                ₹12,500, plus ~₹1,200 in tolls ≈ ₹13,700 total, split 5 ways.
                 Permits &amp; jeep breakdown: Mullayanagiri pass ₹150 · Baba Budangiri ₹100 · Jhari Falls jeep ₹500 ·
                 Hebbe Falls jeep ₹708 · Z Point entry ₹50. These are per-person estimates from current listings - treat
-                the ₹7,530 cushion as your real contingency fund, or just spend it on more coffee.</p>
+                the ₹5,672 cushion as your real contingency fund, or just spend it on more coffee.</p>
         </div>
     </section>
 
@@ -1730,9 +1871,9 @@
             </details>
             <details class="faq-item">
                 <summary>How much fuel should we actually budget for the drive?</summary>
-                <p>~1,500km total across the trip. At a blended ~13.8km/l for the XUV 3XO (15 highway / 12 city) and
-                    diesel around ₹92/l, that's roughly ₹10,000 in fuel plus ~₹1,200 in tolls - split five ways, that's
-                    the ₹2,240/head in the ledger above.</p>
+                <p>~1,500km total across the trip. At ~12km/l for the XUV 3XO and petrol around ₹100/l, that's roughly
+                    ₹12,500 in fuel plus ~₹1,200 in tolls - split five ways, that's the ₹2,740/head in the ledger
+                    above.</p>
             </details>
             <details class="faq-item">
                 <summary>Do we need any special permit to drive a Telangana-registered car into Karnataka?</summary>
