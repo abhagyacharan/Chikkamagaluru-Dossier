@@ -1978,6 +1978,20 @@
             });
         }, { threshold: 0.4 });
         barObserver.observe(bar);
+
+        // persist checklist state on-device via localStorage
+        const CHECK_KEY = 'chikmagalur-checklist-v1';
+        const checkboxes = document.querySelectorAll('.check-list input[type="checkbox"]');
+        const saved = JSON.parse(localStorage.getItem(CHECK_KEY) || '{}');
+        checkboxes.forEach(cb => {
+            if (saved[cb.id]) cb.checked = true;
+            cb.addEventListener('change', () => {
+                const state = JSON.parse(localStorage.getItem(CHECK_KEY) || '{}');
+                if (cb.checked) state[cb.id] = true;
+                else delete state[cb.id];
+                localStorage.setItem(CHECK_KEY, JSON.stringify(state));
+            });
+        });
     </script>
 
 </body>
